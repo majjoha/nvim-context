@@ -6,7 +6,7 @@ RSpec.describe NeovimContext::NeovimConnector do
   let(:client) { instance_double(Neovim::Client) }
 
   describe "#initialize" do
-    let(:neovim_connector) { described_class.new(client: nil) }
+    let(:neovim_connector) { described_class.new(client: client) }
 
     it "is an instance of a `NeovimConnector`" do
       expect(neovim_connector).to be_instance_of(described_class)
