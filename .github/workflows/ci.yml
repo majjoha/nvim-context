@@ -28,9 +28,6 @@ jobs:
         with:
           ruby-version: 3.4.7
           bundler-cache: true
-      - name: Set up Neovim
-        uses: rhysd/action-setup-vim@v1
-        with:
-          neovim: true
-          version: stable
+      - name: Install Neovim
+        run: sudo apt update && sudo apt install -y neovim
       - run: bundle exec rspec spec/integration/
