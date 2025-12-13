@@ -70,4 +70,33 @@ RSpec.describe NeovimContext::NeovimDataExtractor do
       end
     end
   end
+
+  describe ".diagnostics" do
+    let(:client) { double("client") }
+    let(:raw_diagnostics) do
+      [
+        { "lnum" => 0, "col" => 0, "message" => "Error", "severity" => 1 },
+        { "lnum" => 1, "col" => 2, "message" => "Warning", "severity" => 2 }
+      ]
+    end
+
+    before do
+      allow(client).to receive(:eval).with("vim.diagnostic.get(0)")
+        .and_return([
+                      { "lnum" => 0, "col" => 0, "message" => "Error",
+                        "severity" => 1 },
+                      { "lnum" => 1, "col" => 2, "message" => "Warning",
+                        "severity" => 2 }
+                    ])
+    end
+
+    it "returns mapped diagnostics with adjusted line and column" do
+      expect(described_class.diagnostics(client: client)).to eq(
+        [
+          { line: 1, col: 1, message: "Error", severity: 1 },
+          { line: 2, col: 3, message: "Warning", severity: 2 }
+        ]
+      )
+    end
+  end
 end

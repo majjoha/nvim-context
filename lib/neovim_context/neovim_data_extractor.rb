@@ -31,6 +31,19 @@ module NeovimContext
       nil
     end
 
+    def self.diagnostics(client:)
+      client.eval("vim.diagnostic.get(0)").map do |diagnostic|
+        {
+          line: diagnostic["lnum"] + 1,
+          col: diagnostic["col"] + 1,
+          message: diagnostic["message"],
+          severity: diagnostic["severity"]
+        }
+      end
+    rescue StandardError
+      []
+    end
+
     class << self
       private
 
