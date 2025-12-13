@@ -20,5 +20,44 @@ module NeovimContext
       raise NeovimContextError,
             "Failed to get file info: #{e.message}"
     end
+
+    def self.visual_selection(client:)
+      return nil unless visual_mode?(client)
+
+      marks = visual_marks(client)
+      text = selected_text(client, marks)
+      build_selection_info(marks, text)
+    rescue StandardError
+      nil
+    end
+
+    class << self
+      private
+
+      def visual_mode?(client)
+        ["v", "V", "\x16"].include?(client.eval("mode()"))
+      end
+
+      def visual_marks(client)
+        {
+          start: client.eval("getpos(\"'<\")"),
+          end: client.eval("getpos(\"'>\")")
+        }
+      end
+
+      def selected_text(client, marks)
+        start_line = marks[:start][1]
+        end_line = marks[:end][1]
+        client.eval("getline(#{start_line}, #{end_line})")
+      end
+
+      def build_selection_info(marks, text)
+        {
+          start: { line: marks[:start][1], col: marks[:start][2] },
+          end: { line: marks[:end][1], col: marks[:end][2] },
+          text: text.join("\n")
+        }
+      end
+    end
   end
 end
