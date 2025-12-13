@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "neovim"
-
 module NeovimContext
   class NeovimDataExtractor
     def self.cursor_info(client:)

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "neovim"
-
 module NeovimContext
   class ContextBuilder
     def self.build(client:)
