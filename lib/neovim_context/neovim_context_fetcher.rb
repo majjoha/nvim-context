@@ -12,7 +12,7 @@ class NeovimContextFetcher
     rescue NeovimContext::NeovimConnectionError => e
       handle_error(:connection, e)
     rescue NeovimContext::NeovimContextError,
-           NeovimContext::NeovimOperationError => e
+      NeovimContext::NeovimOperationError => e
       handle_error(:extraction, e)
     end
 

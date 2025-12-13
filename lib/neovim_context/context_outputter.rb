@@ -8,9 +8,9 @@ module NeovimContext
       puts JSON.generate(context)
     rescue StandardError => e
       puts JSON.generate({
-                           error: "No Neovim context available",
-                           details: e.message
-                         })
+        error: "No Neovim context available",
+        details: e.message
+      })
     end
   end
 end

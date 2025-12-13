@@ -4,6 +4,8 @@ require "neovim"
 
 module NeovimContext
   class NeovimConnector
+    SOCKET_PATH = ".opencode/nvim.sock"
+
     def initialize(client: nil)
       @client = client || begin
         Neovim.attach_unix(SOCKET_PATH)
@@ -20,8 +22,6 @@ module NeovimContext
     end
 
     private
-
-    SOCKET_PATH = ".opencode/nvim.sock"
 
     attr_reader :client
   end

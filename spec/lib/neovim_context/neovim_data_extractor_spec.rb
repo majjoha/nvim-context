@@ -32,34 +32,32 @@ RSpec.describe NeovimContext::NeovimDataExtractor do
     end
 
     it "returns the current file name" do
-      expect(described_class.file_info(client: client)).to eq(
-        "/path/to/file.rb"
-      )
+      expect(described_class.file_info(client: client)).to eq("/path/to/file.rb")
     end
   end
 
   describe ".visual_selection" do
     let(:client) { double("client") }
+    let(:expected_selection) do
+      {
+        start: { line: 1, col: 0 },
+        end: { line: 1, col: 5 },
+        text: "selected text"
+      }
+    end
 
     context "when in visual mode" do
       before do
         allow(client).to receive(:eval).with("mode()").and_return("v")
-        allow(client).to receive(:eval).with("getpos(\"'<\")")
-          .and_return([0, 1, 0, 0])
-        allow(client).to receive(:eval).with("getpos(\"'>\")")
-          .and_return([0, 1, 5, 0])
-        allow(client).to receive(:eval).with("getline(1, 1)")
-          .and_return(["selected text"])
+        allow(client).to receive(:eval).with("getpos(\"'<\")").and_return([0,
+          1, 0, 0])
+        allow(client).to receive(:eval).with("getpos(\"'>\")").and_return([0,
+          1, 5, 0])
+        allow(client).to receive(:eval).with("getline(1, 1)").and_return(["selected text"])
       end
 
       it "returns selection info" do
-        expect(described_class.visual_selection(client: client)).to eq(
-          {
-            start: { line: 1, col: 0 },
-            end: { line: 1, col: 5 },
-            text: "selected text"
-          }
-        )
+        expect(described_class.visual_selection(client: client)).to eq(expected_selection)
       end
     end
 
@@ -73,30 +71,22 @@ RSpec.describe NeovimContext::NeovimDataExtractor do
 
   describe ".diagnostics" do
     let(:client) { double("client") }
-    let(:raw_diagnostics) do
+    let(:expected_diagnostics) do
       [
-        { "lnum" => 0, "col" => 0, "message" => "Error", "severity" => 1 },
-        { "lnum" => 1, "col" => 2, "message" => "Warning", "severity" => 2 }
+        { line: 1, col: 1, message: "Error", severity: 1 },
+        { line: 2, col: 3, message: "Warning", severity: 2 }
       ]
     end
 
     before do
-      allow(client).to receive(:eval).with("vim.diagnostic.get(0)")
-        .and_return([
-                      { "lnum" => 0, "col" => 0, "message" => "Error",
-                        "severity" => 1 },
-                      { "lnum" => 1, "col" => 2, "message" => "Warning",
-                        "severity" => 2 }
-                    ])
+      allow(client).to receive(:eval).with("vim.diagnostic.get(0)").and_return([
+        { "lnum" => 0, "col" => 0, "message" => "Error", "severity" => 1 },
+        { "lnum" => 1, "col" => 2, "message" => "Warning", "severity" => 2 }
+      ])
     end
 
     it "returns mapped diagnostics with adjusted line and column" do
-      expect(described_class.diagnostics(client: client)).to eq(
-        [
-          { line: 1, col: 1, message: "Error", severity: 1 },
-          { line: 2, col: 3, message: "Warning", severity: 2 }
-        ]
-      )
+      expect(described_class.diagnostics(client: client)).to eq(expected_diagnostics)
     end
   end
 end
