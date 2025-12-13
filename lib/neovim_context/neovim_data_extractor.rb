@@ -3,8 +3,6 @@
 require "neovim"
 
 module NeovimContext
-  class NeovimContextError < StandardError; end
-
   class NeovimDataExtractor
     def self.cursor_info(client:)
       cursor = client.current.window.cursor

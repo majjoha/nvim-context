@@ -3,9 +3,6 @@
 require "neovim"
 
 module NeovimContext
-  class NeovimConnectionError < StandardError; end
-  class NeovimOperationError < StandardError; end
-
   class NeovimConnector
     def initialize(client: nil)
       @client = client || begin
