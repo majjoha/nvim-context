@@ -6,4 +6,7 @@ gem "neovim"
 
 group :test, :development do
   gem "rspec"
+  gem "rubocop"
+  gem "rubocop-performance"
+  gem "rubocop-rspec"
 end

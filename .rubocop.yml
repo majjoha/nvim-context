@@ -1,0 +1,40 @@
+---
+AllCops:
+  TargetRubyVersion: 3.4
+  NewCops: enable
+
+plugins:
+  - rubocop-performance
+  - rubocop-rspec
+
+Style/ConditionalAssignment:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/LambdaCall:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: false
+Style/WordArray:
+  Enabled: false
+Style/RegexpLiteral:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+Layout/SpaceInsideBlockBraces:
+  Enabled: false
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+Layout/ParameterAlignment:
+  Enabled: false
+Layout/ArrayAlignment:
+  EnforcedStyle: with_fixed_indentation
+Layout/LineLength:
+  Enabled: true
+  Max: 80
