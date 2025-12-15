@@ -5,7 +5,7 @@ require "fileutils"
 require_relative "../spec_helper"
 
 RSpec.describe "`NeovimContext` integration" do
-  SOCKET_PATH = ".opencode/nvim.sock"
+  SOCKET_PATH = File.expand_path("neovim-context.sock")
   TEST_FILE = "spec/integration/test_file.rb"
 
   before(:all) do

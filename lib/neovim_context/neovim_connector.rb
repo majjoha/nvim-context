@@ -4,11 +4,10 @@ require "neovim"
 
 module NeovimContext
   class NeovimConnector
-    SOCKET_PATH = ".opencode/nvim.sock"
-
     def initialize(client: nil)
+      @socket_path = ENV["NVIM_CONTEXT_SOCKET"] || DEFAULT_SOCKET_PATH
       @client = client || begin
-        Neovim.attach_unix(SOCKET_PATH)
+        Neovim.attach_unix(socket_path)
       rescue StandardError => e
         raise NeovimConnectionError,
               "Failed to connect to Neovim socket: #{e.message}"
@@ -23,6 +22,9 @@ module NeovimContext
 
     private
 
-    attr_reader :client
+    attr_reader :client, :socket_path
+
+    DEFAULT_SOCKET_PATH = File.expand_path("neovim-context.sock")
+    private_constant :DEFAULT_SOCKET_PATH
   end
 end
