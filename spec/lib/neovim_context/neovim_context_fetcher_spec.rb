@@ -2,7 +2,7 @@
 
 require_relative "../../spec_helper"
 
-RSpec.describe NeovimContextFetcher do
+RSpec.describe NeovimContext::NeovimContextFetcher do
   let(:client) { instance_double(Neovim::Client) }
   let(:context) { { cursor: { line: 1, col: 0 }, file: "/path/to/file.rb" } }
 
