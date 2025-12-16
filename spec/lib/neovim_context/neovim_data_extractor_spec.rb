@@ -5,7 +5,7 @@ require_relative "../../spec_helper"
 RSpec.describe NeovimContext::NeovimDataExtractor do
   let(:client) { instance_double(Neovim::Client) }
 
-  describe ".cursor_info" do
+  describe ".cursor" do
     let(:current) { instance_double(Neovim::Current) }
     let(:window) { instance_double(Neovim::Window) }
 
@@ -16,8 +16,7 @@ RSpec.describe NeovimContext::NeovimDataExtractor do
     end
 
     it "returns the cursor position as a hash" do
-      expect(described_class.cursor_info(client: client)).to eq({ line: 1,
-                                                                  col: 0 })
+      expect(described_class.cursor(client: client)).to eq({ line: 1, col: 0 })
     end
   end
 

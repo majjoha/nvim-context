@@ -2,7 +2,7 @@
 
 module NeovimContext
   class NeovimDataExtractor
-    def self.cursor_info(client:)
+    def self.cursor(client:)
       cursor = client.current.window.cursor
       { line: cursor[0], col: cursor[1] }
     rescue StandardError => e

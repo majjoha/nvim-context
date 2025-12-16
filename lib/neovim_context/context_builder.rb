@@ -4,7 +4,7 @@ module NeovimContext
   class ContextBuilder
     def self.build(client:)
       {
-        cursor: NeovimDataExtractor.cursor_info(client: client),
+        cursor: NeovimDataExtractor.cursor(client: client),
         file: NeovimDataExtractor.file_info(client: client),
         selection: NeovimDataExtractor.visual_selection(client: client),
         diagnostics: NeovimDataExtractor.diagnostics(client: client)
