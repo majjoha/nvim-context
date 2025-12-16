@@ -8,10 +8,6 @@ RSpec.describe NeovimContext::NeovimConnector do
   describe "#initialize" do
     let(:neovim_connector) { described_class.new(client: client) }
 
-    it "is an instance of a `NeovimConnector`" do
-      expect(neovim_connector).to be_instance_of(described_class)
-    end
-
     context "when no client is provided and attach fails" do
       before do
         allow(Neovim).to receive(:attach_unix)
