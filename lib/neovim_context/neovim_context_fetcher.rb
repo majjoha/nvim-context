@@ -8,9 +8,9 @@ module NeovimContext
       def fetch
         context = build_context
         JSON.generate(context)
-      rescue NeovimConnectionError => e
+      rescue ConnectionError => e
         output_error("Connection failed", e.message)
-      rescue NeovimContextError => e
+      rescue ContextError => e
         output_error("Context extraction failed", e.message)
       rescue StandardError => e
         output_error("Unexpected error", e.message)

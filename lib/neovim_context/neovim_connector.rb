@@ -9,7 +9,7 @@ module NeovimContext
       @client = client || begin
         Neovim.attach_unix(socket_path)
       rescue StandardError => e
-        raise NeovimConnectionError,
+        raise ConnectionError,
               "Failed to connect to Neovim socket: #{e.message}",
               e.backtrace
       end
@@ -18,7 +18,7 @@ module NeovimContext
     def connect
       yield client if block_given?
     rescue StandardError => e
-      raise NeovimContextError,
+      raise ContextError,
             "Failed during Neovim operation: #{e.message}",
             e.backtrace
     end

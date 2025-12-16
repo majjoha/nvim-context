@@ -6,7 +6,7 @@ module NeovimContext
       cursor = client.current.window.cursor
       { line: cursor[0], col: cursor[1] }
     rescue StandardError => e
-      raise NeovimContextError,
+      raise ContextError,
             "Failed to get cursor info: #{e.message}",
             e.backtrace
     end
@@ -14,7 +14,7 @@ module NeovimContext
     def self.file(client:)
       client.current.buffer.name
     rescue StandardError => e
-      raise NeovimContextError,
+      raise ContextError,
             "Failed to get file info: #{e.message}",
             e.backtrace
     end

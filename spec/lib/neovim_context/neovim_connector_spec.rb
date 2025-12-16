@@ -14,10 +14,10 @@ RSpec.describe NeovimContext::NeovimConnector do
           .and_raise(StandardError.new("Socket not found"))
       end
 
-      it "raises a `NeovimConnectionError` error" do
+      it "raises a `ConnectionError` error" do
         expect do
           described_class.new
-        end.to raise_error(NeovimContext::NeovimConnectionError,
+        end.to raise_error(NeovimContext::ConnectionError,
                            /Failed to connect to Neovim socket/)
       end
     end
@@ -42,10 +42,10 @@ RSpec.describe NeovimContext::NeovimConnector do
           .and_raise(StandardError.new("Lua error"))
       end
 
-      it "raises a `NeovimContextError` error with a message" do
+      it "raises a `ContextError` error with a message" do
         expect do
           connector.connect { client.eval("bad lua") }
-        end.to raise_error(NeovimContext::NeovimContextError,
+        end.to raise_error(NeovimContext::ContextError,
                            /Failed during Neovim operation/)
       end
     end

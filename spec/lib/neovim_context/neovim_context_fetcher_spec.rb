@@ -35,7 +35,7 @@ RSpec.describe NeovimContext::NeovimContextFetcher do
     context "when connection fails" do
       before do
         allow(NeovimContext::NeovimConnector).to receive(:new).and_raise(
-          NeovimContext::NeovimConnectionError.new("Socket error")
+          NeovimContext::ConnectionError.new("Socket error")
         )
       end
 
@@ -49,7 +49,7 @@ RSpec.describe NeovimContext::NeovimContextFetcher do
     context "when context extraction fails" do
       before do
         allow(NeovimContext::NeovimDataExtractor).to receive(:cursor).and_raise(
-          NeovimContext::NeovimContextError.new("Build error")
+          NeovimContext::ContextError.new("Build error")
         )
       end
 
