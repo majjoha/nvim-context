@@ -1,28 +1,24 @@
 # frozen_string_literal: true
 
+require "json"
 require_relative "../../spec_helper"
 
 RSpec.describe NeovimContext::NeovimContextFetcher do
   let(:client) { instance_double(Neovim::Client) }
+  let(:connector) { instance_double(NeovimContext::NeovimConnector) }
   let(:context) { { cursor: { line: 1, col: 0 }, file: "/path/to/file.rb" } }
 
   describe ".fetch" do
     before do
-      connector = double
-      allow(connector).to receive(:connect).and_yield(client)
       allow(NeovimContext::NeovimConnector).to receive(:new)
         .and_return(connector)
+      allow(connector).to receive(:connect).and_yield(client)
       allow(NeovimContext::ContextBuilder).to receive(:build)
         .and_return(context)
-      allow(NeovimContext::ContextOutputter).to receive(:output)
-        .and_call_original
     end
 
-    it "orchestrates connection, building, and output" do
-      described_class.fetch
-
-      expect(NeovimContext::ContextOutputter)
-        .to have_received(:output).with(context)
+    it "returns the context as JSON" do
+      expect(described_class.fetch).to eq(JSON.generate(context))
     end
 
     context "when connection fails" do
@@ -32,12 +28,10 @@ RSpec.describe NeovimContext::NeovimContextFetcher do
         )
       end
 
-      it "outputs connection error" do
-        described_class.fetch
-
-        expect(NeovimContext::ContextOutputter).to have_received(:output).with(
-          { error: "Connection failed", details: "Socket error" }
-        )
+      it "returns connection error as JSON" do
+        expect(described_class.fetch).to eq(JSON.generate({
+          error: "Connection failed", details: "Socket error"
+        }))
       end
     end
 
@@ -48,12 +42,10 @@ RSpec.describe NeovimContext::NeovimContextFetcher do
         )
       end
 
-      it "outputs extraction error" do
-        described_class.fetch
-
-        expect(NeovimContext::ContextOutputter).to have_received(:output).with(
-          { error: "Context extraction failed", details: "Build error" }
-        )
+      it "returns extraction error as JSON" do
+        expect(described_class.fetch).to eq(JSON.generate({
+          error: "Context extraction failed", details: "Build error"
+        }))
       end
     end
   end

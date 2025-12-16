@@ -6,26 +6,26 @@ module NeovimContext
   class NeovimContextFetcher
     class << self
       def fetch
-        NeovimConnector.new.connect do |client|
-          context = ContextBuilder.build(client: client)
-          ContextOutputter.output(context)
-        end
+        context = build_context
+        JSON.generate(context)
       rescue NeovimConnectionError => e
-        handle_error(:connection, e)
-      rescue NeovimContextError,
-        NeovimOperationError => e
-        handle_error(:extraction, e)
+        output_error("Connection failed", e.message)
+      rescue NeovimContextError, NeovimOperationError => e
+        output_error("Context extraction failed", e.message)
+      rescue StandardError => e
+        output_error("Unexpected error", e.message)
       end
 
       private
 
-      def handle_error(type, error)
-        message = case type
-                  when :connection then "Connection failed"
-                  when :extraction then "Context extraction failed"
-                  end
-        ContextOutputter.output({ error: message,
-                                  details: error.message })
+      def build_context
+        NeovimConnector.new.connect do |client|
+          ContextBuilder.build(client: client)
+        end
+      end
+
+      def output_error(error, details)
+        JSON.generate({ error: error, details: details })
       end
     end
   end
