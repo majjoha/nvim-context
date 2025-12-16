@@ -10,14 +10,17 @@ module NeovimContext
         Neovim.attach_unix(socket_path)
       rescue StandardError => e
         raise NeovimConnectionError,
-              "Failed to connect to Neovim socket: #{e.message}"
+              "Failed to connect to Neovim socket: #{e.message}",
+              e.backtrace
       end
     end
 
     def connect
       yield client if block_given?
     rescue StandardError => e
-      raise NeovimOperationError, "Failed during Neovim operation: #{e.message}"
+      raise NeovimContextError,
+            "Failed during Neovim operation: #{e.message}",
+            e.backtrace
     end
 
     private

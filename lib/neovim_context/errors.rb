@@ -3,5 +3,4 @@
 module NeovimContext
   class NeovimConnectionError < StandardError; end
   class NeovimContextError < StandardError; end
-  class NeovimOperationError < StandardError; end
 end

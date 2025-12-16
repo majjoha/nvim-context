@@ -46,10 +46,10 @@ RSpec.describe NeovimContext::NeovimConnector do
           .and_raise(StandardError.new("Lua error"))
       end
 
-      it "raises a `NeovimOperationError` error with a message" do
+      it "raises a `NeovimContextError` error with a message" do
         expect do
           connector.connect { client.eval("bad lua") }
-        end.to raise_error(NeovimContext::NeovimOperationError,
+        end.to raise_error(NeovimContext::NeovimContextError,
                            /Failed during Neovim operation/)
       end
     end

@@ -10,7 +10,7 @@ module NeovimContext
         JSON.generate(context)
       rescue NeovimConnectionError => e
         output_error("Connection failed", e.message)
-      rescue NeovimContextError, NeovimOperationError => e
+      rescue NeovimContextError => e
         output_error("Context extraction failed", e.message)
       rescue StandardError => e
         output_error("Unexpected error", e.message)
