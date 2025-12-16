@@ -20,7 +20,12 @@ module NeovimContext
 
       def build_context
         NeovimConnector.new.connect do |client|
-          ContextBuilder.build(client: client)
+          {
+            cursor: NeovimDataExtractor.cursor(client: client),
+            file: NeovimDataExtractor.file(client: client),
+            selection: NeovimDataExtractor.visual_selection(client: client),
+            diagnostics: NeovimDataExtractor.diagnostics(client: client)
+          }
         end
       end
 
