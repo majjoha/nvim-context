@@ -45,8 +45,11 @@ module NeovimContext
     class << self
       private
 
+      VISUAL_BLOCK_MODE = "\x16"
+      private_constant :VISUAL_BLOCK_MODE
+
       def visual_mode?(client)
-        ["v", "V", "\x16"].include?(client.eval("mode()"))
+        ["v", "V", VISUAL_BLOCK_MODE].include?(client.eval("mode()"))
       end
 
       def visual_marks(client)
