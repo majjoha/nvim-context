@@ -24,7 +24,7 @@ RSpec.describe NeovimContext::ContextBuilder do
     before do
       allow(NeovimContext::NeovimDataExtractor).to receive_messages(
         cursor: { line: 1, col: 0 },
-        file_info: "/path/to/file.rb",
+        file: "/path/to/file.rb",
         visual_selection: {
           start: { line: 1, col: 0 },
           end: { line: 1, col: 5 },

@@ -11,7 +11,7 @@ module NeovimContext
             e.backtrace
     end
 
-    def self.file_info(client:)
+    def self.file(client:)
       client.current.buffer.name
     rescue StandardError => e
       raise NeovimContextError,

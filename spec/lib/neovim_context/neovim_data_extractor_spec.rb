@@ -20,7 +20,7 @@ RSpec.describe NeovimContext::NeovimDataExtractor do
     end
   end
 
-  describe ".file_info" do
+  describe ".file" do
     let(:current) { instance_double(Neovim::Current) }
     let(:buffer) { instance_double(Neovim::Buffer) }
 
@@ -31,7 +31,7 @@ RSpec.describe NeovimContext::NeovimDataExtractor do
     end
 
     it "returns the current file name" do
-      expect(described_class.file_info(client: client)).to eq("/path/to/file.rb")
+      expect(described_class.file(client: client)).to eq("/path/to/file.rb")
     end
   end
 
