@@ -52,11 +52,13 @@ RSpec.describe NeovimContext::DataExtractor do
           1, 0, 0])
         allow(client).to receive(:eval).with("getpos(\"'>\")").and_return([0,
           1, 5, 0])
-        allow(client).to receive(:eval).with("getline(1, 1)").and_return(["selected text"])
+        allow(client).to receive(:eval).with("getline(1, 1)")
+          .and_return(["selected text"])
       end
 
       it "returns selection info" do
-        expect(described_class.visual_selection(client: client)).to eq(expected_selection)
+        expect(described_class.visual_selection(client: client))
+          .to eq(expected_selection)
       end
     end
 
@@ -85,7 +87,8 @@ RSpec.describe NeovimContext::DataExtractor do
     end
 
     it "returns mapped diagnostics with adjusted line and column" do
-      expect(described_class.diagnostics(client: client)).to eq(expected_diagnostics)
+      expect(described_class.diagnostics(client: client))
+        .to eq(expected_diagnostics)
     end
   end
 end
