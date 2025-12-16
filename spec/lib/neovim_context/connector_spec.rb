@@ -47,6 +47,7 @@ RSpec.describe NeovimContext::Connector do
           connector.connect { client.eval("bad lua") }
         end.to raise_error(NeovimContext::ContextError,
                            /Failed during Neovim operation/)
+        expect(client).to have_received(:eval).with("bad lua")
       end
     end
   end

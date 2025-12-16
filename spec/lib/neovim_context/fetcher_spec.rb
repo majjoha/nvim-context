@@ -30,6 +30,10 @@ RSpec.describe NeovimContext::Fetcher do
 
     it "returns the context as JSON" do
       expect(described_class.fetch).to eq(JSON.generate(context))
+      expect(NeovimContext::DataExtractor).to have_received(:cursor).with(client: client)
+      expect(NeovimContext::DataExtractor).to have_received(:file).with(client: client)
+      expect(NeovimContext::DataExtractor).to have_received(:visual_selection).with(client: client)
+      expect(NeovimContext::DataExtractor).to have_received(:diagnostics).with(client: client)
     end
 
     context "when connection fails" do
