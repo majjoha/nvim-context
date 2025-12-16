@@ -3,7 +3,7 @@
 require "neovim"
 
 module NeovimContext
-  class NeovimConnector
+  class Connector
     def initialize(client: nil)
       @socket_path = ENV["NVIM_CONTEXT_SOCKET"] || DEFAULT_SOCKET_PATH
       @client = client || begin

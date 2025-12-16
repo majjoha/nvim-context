@@ -2,7 +2,7 @@
 
 require_relative "../../spec_helper"
 
-RSpec.describe NeovimContext::NeovimConnector do
+RSpec.describe NeovimContext::Connector do
   let(:client) { instance_double(Neovim::Client) }
 
   describe "#initialize" do

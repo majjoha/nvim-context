@@ -3,7 +3,7 @@
 require "json"
 
 module NeovimContext
-  class NeovimContextFetcher
+  class Fetcher
     class << self
       def fetch
         context = build_context
@@ -19,12 +19,12 @@ module NeovimContext
       private
 
       def build_context
-        NeovimConnector.new.connect do |client|
+        Connector.new.connect do |client|
           {
-            cursor: NeovimDataExtractor.cursor(client: client),
-            file: NeovimDataExtractor.file(client: client),
-            selection: NeovimDataExtractor.visual_selection(client: client),
-            diagnostics: NeovimDataExtractor.diagnostics(client: client)
+            cursor: DataExtractor.cursor(client: client),
+            file: DataExtractor.file(client: client),
+            selection: DataExtractor.visual_selection(client: client),
+            diagnostics: DataExtractor.diagnostics(client: client)
           }
         end
       end

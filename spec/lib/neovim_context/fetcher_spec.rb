@@ -3,9 +3,9 @@
 require "json"
 require_relative "../../spec_helper"
 
-RSpec.describe NeovimContext::NeovimContextFetcher do
+RSpec.describe NeovimContext::Fetcher do
   let(:client) { instance_double(Neovim::Client) }
-  let(:connector) { instance_double(NeovimContext::NeovimConnector) }
+  let(:connector) { instance_double(NeovimContext::Connector) }
   let(:context) do
     {
       cursor: { line: 1, col: 0 },
@@ -17,10 +17,10 @@ RSpec.describe NeovimContext::NeovimContextFetcher do
 
   describe ".fetch" do
     before do
-      allow(NeovimContext::NeovimConnector).to receive(:new)
+      allow(NeovimContext::Connector).to receive(:new)
         .and_return(connector)
       allow(connector).to receive(:connect).and_yield(client)
-      allow(NeovimContext::NeovimDataExtractor).to receive_messages(
+      allow(NeovimContext::DataExtractor).to receive_messages(
         cursor: { line: 1, col: 0 },
         file: "/path/to/file.rb",
         visual_selection: nil,
@@ -34,7 +34,7 @@ RSpec.describe NeovimContext::NeovimContextFetcher do
 
     context "when connection fails" do
       before do
-        allow(NeovimContext::NeovimConnector).to receive(:new).and_raise(
+        allow(NeovimContext::Connector).to receive(:new).and_raise(
           NeovimContext::ConnectionError.new("Socket error")
         )
       end
@@ -48,7 +48,7 @@ RSpec.describe NeovimContext::NeovimContextFetcher do
 
     context "when context extraction fails" do
       before do
-        allow(NeovimContext::NeovimDataExtractor).to receive(:cursor).and_raise(
+        allow(NeovimContext::DataExtractor).to receive(:cursor).and_raise(
           NeovimContext::ContextError.new("Build error")
         )
       end

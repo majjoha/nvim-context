@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module NeovimContext
-  class NeovimDataExtractor
+  class DataExtractor
     def self.cursor(client:)
       cursor = client.current.window.cursor
       { line: cursor[0], col: cursor[1] }
