@@ -11,9 +11,6 @@ RSpec.describe "`NeovimContext` integration" do
   before(:all) do
     skip "Neovim not installed" unless system("which nvim > /dev/null 2>&1")
 
-    # Ensure socket directory exists
-    FileUtils.mkdir_p(".opencode")
-
     # Start Neovim in headless mode
     @neovim_pid = Process.spawn(
       "nvim",
