@@ -32,7 +32,7 @@ RSpec.describe NeovimContext::Connector do
       end
 
       it "does not raise an error" do
-        expect { connector.connect {} }.not_to raise_error
+        expect { connector.connect }.not_to raise_error
       end
     end
 
