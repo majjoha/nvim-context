@@ -124,7 +124,35 @@ This provides JSON output like:
 </details>
 
 ### Codex
-TBD.
+<details>
+<summary><code>~/.codex/prompts/nvim-context.md</code></summary>
+<pre>
+---
+description: Answer questions about the code referenced by `nvim-context`
+---
+
+By running `nvim-context`, answer questions such as:
+- "What's wrong with this line?"
+- "Explain the selected code"
+- "What file am I in?"
+- "Show me all errors"
+
+`nvim-context` returns JSON in this format:
+```json
+{
+  "cursor": {
+    "line": 43,
+    "col": 3
+  },
+  "file": "/path/to/current/file.rb",
+  "selection": null,
+  "diagnostics": []
+}
+```
+Use this data to look up the file and position in the file, and then utilize
+this context to answer the user's question. 
+</pre>
+</details>
 
 #### Gemini
 TBD.
