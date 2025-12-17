@@ -2,10 +2,10 @@
 
 require_relative "../../spec_helper"
 
-RSpec.describe NeovimContext::VERSION do
+RSpec.describe NvimContext::VERSION do
   describe "VERSION" do
     it "is version 1.0.0" do
-      expect(NeovimContext::VERSION).to eq("1.0.0")
+      expect(NvimContext::VERSION).to eq("1.0.0")
     end
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "rspec"
-require_relative "../lib/neovim_context"
+require_relative "../lib/nvim_context"
 
 RSpec.configure do |config|
   config.expect_with(:rspec) do |c|

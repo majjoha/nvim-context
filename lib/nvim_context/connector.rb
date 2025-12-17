@@ -2,7 +2,7 @@
 
 require "neovim"
 
-module NeovimContext
+module NvimContext
   class Connector
     def initialize(client: nil)
       @socket_path = ENV["NVIM_CONTEXT_SOCKET"] || DEFAULT_SOCKET_PATH
@@ -27,7 +27,7 @@ module NeovimContext
 
     attr_reader :client, :socket_path
 
-    DEFAULT_SOCKET_PATH = File.expand_path("neovim-context.sock")
+    DEFAULT_SOCKET_PATH = File.expand_path("nvim-context.sock")
     private_constant :DEFAULT_SOCKET_PATH
   end
 end

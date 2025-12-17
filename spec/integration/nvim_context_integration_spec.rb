@@ -4,8 +4,8 @@ require "English"
 require "fileutils"
 require_relative "../spec_helper"
 
-RSpec.describe "`NeovimContext` integration" do
-  SOCKET_PATH = File.expand_path("neovim-context.sock")
+RSpec.describe "`NvimContext` integration" do
+  SOCKET_PATH = File.expand_path("nvim-context.sock")
   TEST_FILE = File.expand_path("spec/integration/test_file.rb")
 
   before(:all) do
@@ -29,7 +29,7 @@ RSpec.describe "`NeovimContext` integration" do
   end
 
   it "retrieves the context from the running Neovim instance" do
-    output = `ruby bin/neovim-context`
+    output = `ruby bin/nvim-context`
 
     expect($CHILD_STATUS).to be_success
     expect(JSON.parse(output)).to include(

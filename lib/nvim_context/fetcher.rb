@@ -2,7 +2,7 @@
 
 require "json"
 
-module NeovimContext
+module NvimContext
   class Fetcher
     class << self
       def fetch
