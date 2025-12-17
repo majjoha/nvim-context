@@ -72,6 +72,7 @@ selection (if any), and diagnostics in this format:
 
 ### Integration with agentic tools
 #### Amp Code
+[Amp Code supports Claude Skills natively.](https://ampcode.com/news/agent-skills)
 
 #### Claude Code
 <details>
@@ -104,7 +105,7 @@ context-aware questions about code.
 - "What file am I in?" → Return current file path
 - "Show me all errors" → List all LSP diagnostics
 
-## Technical Details
+## Technical details
 The skill runs: `nvim-context`
 
 This provides JSON output like:
