@@ -123,7 +123,7 @@ This provides JSON output like:
 </pre>
 </details>
 
-### Codex
+#### Codex
 <details>
 <summary><code>~/.codex/prompts/nvim-context.md</code></summary>
 <pre>
