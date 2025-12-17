@@ -2,11 +2,11 @@
 
 source "https://rubygems.org"
 
-gem "neovim"
+gemspec
 
-group :test, :development do
-  gem "rspec"
-  gem "rubocop"
-  gem "rubocop-performance"
-  gem "rubocop-rspec"
+group :development, :test do
+  gem "rspec", "~> 3.13.0"
+  gem "rubocop", "~> 1.81.0"
+  gem "rubocop-performance", "~> 1.26.0"
+  gem "rubocop-rspec", "~> 3.8.0"
 end
