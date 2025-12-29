@@ -185,31 +185,14 @@ TBD.
 
 #### OpenCode
 <details>
-<summary><code>~/.config/opencode/tool/nvim-context.ts</code></summary>
+<summary><code>~/.config/opencode/command/nvim-context.md</code></summary>
+<pre>
+---
+description: Show current Neovim context
+---
 
-```typescript
-import { execSync } from "child_process";
-
-export default {
-  description:
-    "Get the current Neovim context as JSON (cursor position, current file, visual selection and diagnostics)",
-  args: {},
-  async execute(args) {
-    try {
-      const output = execSync(
-        "nvim-context",
-        {
-          encoding: "utf8",
-          timeout: 5000,
-        },
-      );
-      return output.trim();
-    } catch (error) {
-      return `nvim-context unavailable: ${error.message}`;
-    }
-  },
-};
-```
+!`nvim-context`
+</pre>
 </details>
 
 ## Disclaimer
