@@ -1,0 +1,5 @@
+{
+  "name": "nvim-context",
+  "version": "1.0.0",
+  "description": "Bridge between running Neovim instances and agentic coding tools."
+}

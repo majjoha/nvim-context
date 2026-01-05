@@ -1,0 +1,13 @@
+{
+  "name": "nvim-context",
+  "owner": {
+    "name": "Mathias Jean Johansen"
+  },
+  "plugins": [
+    {
+      "name": "nvim-context",
+      "source": "./",
+      "description": "Bridge between running Neovim instances and agentic coding tools."
+    }
+  ]
+}
