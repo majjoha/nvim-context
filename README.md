@@ -72,7 +72,9 @@ selection (if any), and diagnostics in this format:
 
 ### Integration with agentic tools
 #### Amp Code
-[Amp Code supports Claude Skills natively.](https://ampcode.com/news/agent-skills)
+```sh
+amp skill add majjoha/nvim-context/nvim-context
+```
 
 #### Claude Code
 ```sh
